@@ -7,7 +7,7 @@ client.connect("pi-server.local", 1883, 60)
 print("connected")
 # Initialize ultrasonic sensor
 sensor = DistanceSensor(trigger=18, echo=24)
-topic = "client1"
+topic = "client2"
 while True:
 	# Wait 2 seconds
 	sleep(1)
