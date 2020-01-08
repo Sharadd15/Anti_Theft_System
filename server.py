@@ -1,19 +1,39 @@
 import paho.mqtt.client as mqtt
 import time
+import datetime
 from picamera import PiCamera
+import firebase_admin
+from firebase_admin import credentials, firestore, storage
+
 client = mqtt.Client()
 camera = PiCamera() 
+
+cred = credentials.Certificate('serviceAccount.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+bucket = storage.bucket('smart-anti-theft.appspot.com')
+
 def on_message(client, userdata, message):
     print "Message received: "  + message.payload
-    if message.payload == "INTRUDER ALERT!":
+    if message.payload == "INTRUDER ALERT FRONT DOOR!":
         camera.start_preview()
         time.sleep(5)
-        camera.capture('pict/image.jpeg')
+        now = datetime.datetime.now()
+        pic_path = "pict/" + str(now) + ".jpeg"
+        camera.capture(pic_path)
         camera.stop_preview()
+        db.collection(u'alerts').add({
+            u'timestamp': now,
+            u'location': u'Front door'
+        })
+
+        blob = bucket.blob(str(now) + ".jpeg")
+        blob.upload_from_filename(pic_path)
+
 client.on_message= on_message   
 client.connect("pi-server.local", 1883, 60)
 print("connected")
-client.loop_start()        #start the loop 
+client.loop_start()
  
 client.subscribe("client2")
  
