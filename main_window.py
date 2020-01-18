@@ -34,8 +34,8 @@ while True:
 			if(t == 1):
 			#print('Motion detected')
 			#if (distance < 100):
-				client.publish(topic,"INTRUDER ALERT!")
-				print("INRUDER ALERT")
+				client.publish(topic,"INTRUDER ALERT FROM WINDOW!")
+				print("INTRUDER ALERT FROM WINDOW!")
 		else:
 			
 			t = 0
