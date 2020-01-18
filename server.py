@@ -15,11 +15,11 @@ bucket = storage.bucket('smart-anti-theft.appspot.com')
 
 def on_message(client, userdata, message):
     print "Message received: "  + message.payload
-    if message.payload == "INTRUDER ALERT FRONT DOOR!":
+    if message.payload == "INTRUDER ALERT!":
         camera.start_preview()
         time.sleep(5)
         now = datetime.datetime.now()
-        pic_path = "pict/" + str(now) + ".jpeg"
+        pic_path = "pict/" + str(now) + ".jpg"
         camera.capture(pic_path)
         camera.stop_preview()
         db.collection(u'alerts').add({
@@ -27,7 +27,7 @@ def on_message(client, userdata, message):
             u'location': u'Front door'
         })
 
-        blob = bucket.blob(str(now) + ".jpeg")
+        blob = bucket.blob(str(now) + ".jpg")
         blob.upload_from_filename(pic_path)
 
 client.on_message= on_message   
