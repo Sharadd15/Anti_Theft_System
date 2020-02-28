@@ -1,10 +1,10 @@
 # Smart Anti_Theft_System
 # Introduction:
 This is a system to detect intruder in house/office. This system is implemented for one room house but can be very easily extended for multi room house. Whenever there is any unknown person entering the house the system will capture the picture wherever is the intrusion (from main door/window/roof(in case there is miss from the other two)) and sends the picture to the owner of the house on the android application on phone and also informs about the point of intrusion
-For more information look in the *file*
+For more information look in the [report](https://github.com/Sharadd15/Anti_Theft_System/blob/master/IoT%20Project%20Report%20SAT%20system.pdf)
 
 # The hardware connections
-***The connections are according to the code. If changes are made in the connections corresponding changes must be made in the code***
+***The connections are according to the code. If changes are made in the connections corresponding changes must be made in the code.***
 There are 4 rpis which are used as server and the other nodes. The image below is refernce for all connection:
 ![alt text](https://www.raspberrypi-spy.co.uk/wp-content/uploads/2012/06/Raspberry-Pi-GPIO-Header-with-Photo.png "rpi pin diagram")
 ### 1. The Server node:
